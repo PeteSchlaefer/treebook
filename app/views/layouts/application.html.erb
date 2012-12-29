@@ -27,9 +27,15 @@
 	</div>
 </div>
 <div class="container">
-	<p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
 
+	<% flash.each do |type, message| %>
+
+		<div class="alert <%= flash_status type %>">
+			<%= message %>
+			<botton class="close" data-dismiss="alert">x</button>
+		</div>
+
+	<% end %>
 	<%= yield %>
 </div>
 </body>
