@@ -1,4 +1,4 @@
-
+<div class="row">
     <%= simple_form_for(@status, :html => { :class=> "span4" }) do |f| %>
     <% if @status.errors.any? %>
       <div id="error_explanation">
@@ -17,3 +17,4 @@
       <%= f.button :submit %>
     </div>
     <% end %>
+</div>
