@@ -1,5 +1,15 @@
-Treebook::Application.routes.draw do
+# order here matters.  these are rules.
+
+ Treebook::Application.routes.draw do
   devise_for :users
+
+  devise_scope :user do
+    get "register", :to => "devise/registrations#new", :as => :register
+    get "sign_in", :to => "devise/sessions#new"
+    get "sign_out", :to => "devise/sessions#destroy", :method => :delete
+  end
+
+  get 'home', :to => 'devise/statuses#index'
 
   resources :statuses
 
