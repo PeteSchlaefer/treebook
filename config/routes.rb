@@ -1,6 +1,8 @@
 # order here matters.  these are rules.
 
  Treebook::Application.routes.draw do
+  get "profiles/show"
+
   devise_for :users
 
   devise_scope :user do
