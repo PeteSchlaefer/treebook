@@ -29,5 +29,13 @@ class CustomRoutesTest < ActionDispatch::IntegrationTest
   	
   end
 
+  test "profile page is returned" do
+
+    get "/pedro"
+
+    assert_response :success
+    
+  end
+
 
 end
