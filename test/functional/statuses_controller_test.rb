@@ -11,9 +11,16 @@ class StatusesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:statuses)
   end
 
-  test "should get new" do
+  test "should be redirected when not logged in and trying to create a new status" do
     get :new
-    assert_response :success
+    assert_response :redirect 
+    assert_redirected_to new_user_session_path
+  end
+
+  test "should allow new status when user is logged in" do
+    sign_in users(:jason)
+    get :new
+    assert_response :success 
   end
 
   test "should create status" do
