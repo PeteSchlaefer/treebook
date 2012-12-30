@@ -1,3 +1,4 @@
+
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -20,6 +21,8 @@ class User < ActiveRecord::Base
 
   validates :last_name, :presence => true
 
-  validates :profile_name, :presence => true, :uniqueness => true, :format => { :with => /a-zA-Z0-9_-/ }
+  validates :profile_name, :uniqueness => true
+
+  validates :profile_name, :presence => true, :format => {:with => /^[a-zA-Z0-9_-]+$/}
 
 end
