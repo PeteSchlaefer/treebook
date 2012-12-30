@@ -23,7 +23,14 @@ class StatusesControllerTest < ActionController::TestCase
     assert_response :success 
   end
 
-  test "should create status" do
+  test "should be logged in to post a status" do
+    post :create, :status => {:content => "hello"}
+    assert_response :redirect
+    assert_redirected_to new_user_session_path
+  end
+
+  test "should create status when logged in" do
+    sign_in users(:jason)
     assert_difference('Status.count') do
       post :create, :status => @status.attributes
     end
@@ -31,22 +38,28 @@ class StatusesControllerTest < ActionController::TestCase
     assert_redirected_to status_path(assigns(:status))
   end
 
-  test "should show status" do
+  test "should show status when logged in" do
     get :show, :id => @status.to_param
-    assert_response :success
+    assert_response :redirect
+    assert_redirected_to new_user_session_path
   end
 
-  test "should get edit" do
+  test "should get edit when logged in" do
     get :edit, :id => @status.to_param
-    assert_response :success
+    assert_response :redirect
+    assert_redirected_to new_user_session_path
   end
 
-  test "should update status" do
+  # i should probably hide the edit links for non-logged in users
+
+  test "should update status when logged in" do
+    sign_in users(:jason)
     put :update, :id => @status.to_param, :status => @status.attributes
     assert_redirected_to status_path(assigns(:status))
   end
 
-  test "should destroy status" do
+  test "should destroy status when logged in" do
+    sign_in users(:jason)
     assert_difference('Status.count', -1) do
       delete :destroy, :id => @status.to_param
     end
